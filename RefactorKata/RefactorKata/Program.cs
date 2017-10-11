@@ -1,41 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace RefactorKata
 {
-    class Program
+    internal class program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            //This is intentionally bad : (  Let's Refactor!
-            System.Data.SqlClient.SqlConnection Conn = new System.Data.SqlClient.SqlConnection("Server=.;Database=myDataBase;User Id=myUsername;Password = myPassword;");
 
-            System.Data.SqlClient.SqlCommand cmd = Conn.CreateCommand();
+            SqlConnection Conn = new SqlConnection("Server=.;Database=myDataBase;User Id=myUsername;Password = myPassword;");
+
+            SqlCommand cmd = Conn.CreateCommand();
             cmd.CommandText = "select * from Products";
             /*
              * cmd.CommandText = "Select * from Invoices";
              */
-            System.Data.SqlClient.SqlDataReader reader = cmd.ExecuteReader();
+            SqlDataReader reader = cmd.ExecuteReader();
             List<Product> products = new List<Product>();
 
             //TODO: Replace with Dapper
             while (reader.Read())
             {
-                var prod = new Product();
-                prod.name = reader["Name"].ToString();
+                var prod = new Product { Name = reader{ ["Name"].ToString() };
+              
                 products.Add(prod);
             }
-            Conn.Dispose();
+            
             Console.WriteLine("Products Loaded!");
-            for (int i =0; i< products.Count; i++)
+            return products;
             {
-                Console.WriteLine(products[i].name);
+                
             }
         }
     }
-    public class Product
+    
     {
-        public string name;
-        public string Name { get { return name; } set { name = value; } }
+        
+       
     }
 }
