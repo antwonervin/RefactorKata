@@ -4,43 +4,39 @@ using System.Data.SqlClient;
 
 namespace RefactorKata
 {
-    internal class program
+    internal class Program
     {
         private static void Main(string[] args)
         {
             var products = GetProducts();
 
-            foreach (var products in products)
+            foreach (var product in products)
             {
-                Console.WriteLine("This product is called: " + Product.Name);
+                Console.WriteLine("This product is called: " + product.Name);
             }
+        }
+        private static IEnumerable<Product> GetProducts()
+        {
+            using (var conn = 
+                new SqlConnection("Server=.;Database=myDataBase;User Id=myUsername;Password = myPassword;"))
 
-            private static IEnumerable<Product> GetProduct()
-                }
-                    
-                {
-
-    
-
-                    using (var conn = new SqlConnection("Server=.;Database=myDataBase;User Id=myUsername;Password = myPassword;"))
-
-                        var cmd = Conn.CreateCommand();
+        var cmd = Conn.CreateCommand();
         cmd.CommandText = "select * from Products";
-            /*
+             /*
              * cmd.CommandText = "Select * from Invoices";
              */
-            var reader = cmd.ExecuteReader();
+        var reader = cmd.ExecuteReader();
         var products = new List<Product>();
 
             //TODO: Replace with Dapper
-            while (reader.Read())
+        while (reader.Read())
             {
-                var prod = new Product { Name = reader{ ["Name"].ToString() };
+        var prod = new Product { Name = reader{ ["Name"].ToString() };
 
         products.Add(prod);
             }
 
-    Console.WriteLine("Products Loaded!");
+        Console.WriteLine("Products Loaded!");
             return products;
             {
                 
