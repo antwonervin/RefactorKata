@@ -20,31 +20,32 @@ namespace RefactorKata
             using (var conn = 
                 new SqlConnection("Server=.;Database=myDataBase;User Id=myUsername;Password = myPassword;"))
 
-        var cmd = Conn.CreateCommand();
-        cmd.CommandText = "select * from Products";
-             /*
-             * cmd.CommandText = "Select * from Invoices";
-             */
-        var reader = cmd.ExecuteReader();
-        var products = new List<Product>();
-
-            //TODO: Replace with Dapper
-        while (reader.Read())
             {
-        var prod = new Product { Name = reader{ ["Name"].ToString() };
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "select * from Products";
+                 /*
+                * cmd.CommandText = "Select * from Invoices";
+                */
+                var reader = cmd.ExecuteReader();
+                var products = new List<Product>();
 
-        products.Add(prod);
-            }
+                //TODO: Replace with Dapper
+                while (reader.Read())
+                {
+                    var prod = new Product { Name = reader ["Name"].ToString() };
 
-        Console.WriteLine("Products Loaded!");
-            return products;
+                    products.Add(prod);
+                }
+
+                        Console.WriteLine("Products Loaded!");
+                        return products;
             {
                 
             }
         }
     }
     
-    {
+    
         
        
     }
